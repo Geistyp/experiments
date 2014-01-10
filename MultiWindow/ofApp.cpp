@@ -5,6 +5,8 @@
 
 GLFWwindow* window;
 
+ofMutex mutex;
+
 //--------------------------------------------------------------
 void ofApp::setup(){
 
@@ -26,7 +28,10 @@ void ofApp::draw(){
 
 	glfwMakeContextCurrent(window);
 
+	// lock share resource to prevent twinkle between two window
+	mutex.lock();
 	image.draw(0, 0);
+	mutex.unlock();
 }
 
 //--------------------------------------------------------------
@@ -34,7 +39,10 @@ void ofApp::renderNextWindow(){
 
 	ofClear(0);
 
+	// lock share resource to prevent twinkle between two window
+	mutex.lock();
 	image.draw(0, 0);
+	mutex.unlock();
 
 }
 

@@ -45,11 +45,15 @@ public:
 		{
 			glfwMakeContextCurrent(wptr);
 
-			ofPushMatrix();
+			glPushMatrix();
 			glViewport(0, 0, width, height);
 
 			glDrawBuffer(GL_FRONT);
 			
+			/*
+			 *	ofSetupScreenPerspective() will cause twinkle
+			 *  seems 0.8.0 oF build it's own matrix stack system
+			 */
 			setupScreenPerspective(width, height);
 			
 			render_function();
@@ -57,7 +61,7 @@ public:
 			//glFlush();
 			glfwSwapBuffers(wptr);
 			//glfwPollEvents();			// work?
-			ofPopMatrix();
+			glPopMatrix();
 		}
 
 		glfwDestroyWindow(wptr);
